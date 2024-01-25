@@ -14,17 +14,17 @@ export async function retriveData(collectionName: string) {
     return data
 }
 
-export async function retriveDataById(collectionName:string, id: string) {
+export async function retriveDataById(collectionName: string, id: string) {
     const snapshot = await getDoc(doc(firestore, collectionName, id))
     const data = snapshot.data()
     return data
 }
 
-export async function signUp(userData:{
+export async function signUp(userData: {
     fullname: string
     email: string
     password: string
-    role?:string
+    role?: string
 }, callback: Function) {
     const q = query(
         collection(firestore, "users"),
@@ -44,17 +44,17 @@ export async function signUp(userData:{
         }
         userData.password = await bcrypt.hash(userData.password, 12)
         await addDoc(collection(firestore, "users"), userData)
-        .then(() => {
-            callback(true)
-        })
-        .catch((error) => {
-            callback(false)
-            console.log(error);
-        })
+            .then(() => {
+                callback(true)
+            })
+            .catch((error) => {
+                callback(false)
+                console.log(error);
+            })
     }
 }
 
-export async function signIn(email:string) {
+export async function signIn(email: string) {
     const q = query(
         collection(firestore, "users"),
         where("email", "==", email)
@@ -69,5 +69,27 @@ export async function signIn(email:string) {
         return data[0]
     } else {
         return null
+    }
+}
+
+export async function signInWithGoogle(data: any, callback: Function) {
+    const q = query(
+        collection(firestore, "users"),
+        where("email", "==", data.email)
+    )
+    const snapshot = await getDocs(q)
+    const user = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+    }))
+
+    if (user.length > 0) {
+        callback(user[0])
+    } else {
+        data.role = "user"
+        await addDoc(collection(firestore, "users"), data)
+            .then(() => {
+                callback(data)
+            })
     }
 }

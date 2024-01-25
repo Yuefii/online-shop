@@ -44,9 +44,9 @@ const login = () => {
     <>
       <AuthLayout>
         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-4xl">
-          Create and account
+          Login
         </h1>
-        <FormLogin handleSubmit={handleSubmit} isLoading={isLoading} error={error} />
+        <FormLogin handleSubmit={handleSubmit} isLoading={isLoading} error={error} callbackUrl={callbackUrl} />
       </AuthLayout>
     </>
   );
