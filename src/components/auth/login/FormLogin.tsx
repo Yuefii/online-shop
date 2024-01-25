@@ -24,7 +24,7 @@ const FormLogin = ({ handleSubmit, isLoading, error, callbackUrl }: any) => {
         {error && (
           <p className="mt-2 text-sm font-light text-red-600">{error}</p>
         )}
-        <Button type="submit" variant="primary" className="w-full">
+        <Button type="submit" className="w-full">
           {isLoading ? "Loading..." : "Login"}
         </Button>
         <div className="flex justify-center">
