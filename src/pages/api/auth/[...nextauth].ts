@@ -1,7 +1,7 @@
 import NextAuth from "next-auth/next"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
-import { signIn, signInWithGoogle } from "@/libs/firebase/firebase_service"
+import { signIn, signInWithGoogle } from "@/libs/services/firebase_auth"
 import { compare } from "bcrypt"
 import { NextAuthOptions } from "next-auth"
 
@@ -37,7 +37,7 @@ const authOptions: NextAuthOptions = {
         }),
         GoogleProvider({
             clientId: process.env.GOOGLE_OAUTH_CLIENT_ID || "",
-            clientSecret: process.env.GOOGLE_OAUTH_CLIENT_ID || "",
+            clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET || "",
         })
     ],
     callbacks: {

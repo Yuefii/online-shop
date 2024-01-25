@@ -9,7 +9,7 @@ const Form = ({handleSubmit, error, isLoading}: any) => {
       <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
       <Input
           label="Your Name"
-          name="name"
+          name="fullname"
           type="text"
           placeholder="Jhon Doe"
         />
