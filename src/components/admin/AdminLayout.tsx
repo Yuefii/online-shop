@@ -6,7 +6,7 @@ const AdminLayout = ({children}:any) => {
     <>
       <main>
         <Sidebar/>
-        <div>
+        <div >
             {children}
         </div>
       </main>

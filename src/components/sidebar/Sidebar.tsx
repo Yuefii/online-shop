@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { signOut } from "next-auth/react";
+import { SidebarList } from "@/helpers/sidebar/sidebarList";
 
 const Sidebar = () => {
   const { pathname } = useRouter();
@@ -15,25 +16,27 @@ const Sidebar = () => {
     <>
       <div className="fixed left-0 top-0 w-64 h-full bg-cyan-600 p-4 z-50 transition-transform">
         <Link
-          href="/dasboard/admin"
+          href="/admin"
           className="flex items-center pb-4 border-b border-b-white"
         >
           <span className="text-lg font-bold text-white ml-3">
             Dasboard Admin
           </span>
         </Link>
-        <ul className="mt-4">
-          <li className="mb-1">
-            <Link
-              href="/dasboard/admin/users"
-              className={`${isLinkActive(
-                "/dasboard/admin/users"
-              )}w-full flex items-center py-2 px-4 text-white font-semibold hover:bg-cyan-800 hover:text-white rounded-md`}
-            >
-              <span className="text-sm">Users</span>
-            </Link>
-          </li>
-        </ul>
+        {SidebarList.map((item, index) => (
+          <ul key={index} className="mt-4">
+            <li className="mb-1">
+              <Link
+                href={item.link}
+                className={`${isLinkActive(
+                  `${item.link}`
+                )}w-full flex items-center py-2 px-4 text-white font-semibold hover:bg-cyan-800 hover:text-white rounded-md`}
+              >
+                <span className="text-sm">{item.title}</span>
+              </Link>
+            </li>
+          </ul>
+        ))}
         <div className="fixed left-0  bottom-0 w-64 bg-cyan-600 p-4 z-50 transition-transform">
           <button
             onClick={() => signOut()}
