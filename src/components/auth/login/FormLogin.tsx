@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import LoginGoogle from "./LoginGoogle";
@@ -37,17 +36,6 @@ const FormLogin = ({ handleSubmit, isLoading, error, callbackUrl }: any) => {
             <LoginGoogle />
           </Button>
         </div>
-        <p className="text-sm font-light text-gray-500">
-          Dont have an account?{" "}
-          <span>
-            <Link
-              href="/auth/register"
-              className="font-medium text-cyan-600 hover:underline"
-            >
-              Register here
-            </Link>
-          </span>
-        </p>
       </form>
     </>
   );

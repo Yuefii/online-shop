@@ -36,17 +36,23 @@ const login = () => {
       setIsLoading(false);
       setError("Email or password is wrong.");
       console.log(error);
-      
     }
   };
 
   return (
     <>
-      <AuthLayout>
-        <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-4xl">
-          Login
-        </h1>
-        <FormLogin handleSubmit={handleSubmit} isLoading={isLoading} error={error} callbackUrl={callbackUrl} />
+      <AuthLayout
+        title="Login"
+        subTitle="Dont have an account? "
+        linkTitle="Register here"
+        link="/auth/register"
+      >
+        <FormLogin
+          handleSubmit={handleSubmit}
+          isLoading={isLoading}
+          error={error}
+          callbackUrl={callbackUrl}
+        />
       </AuthLayout>
     </>
   );
