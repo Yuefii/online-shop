@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { usersService } from "@/libs/services/users_service";
 import AdminLayout from "@/components/admin/AdminLayout";
 import Button from "@/components/ui/Button";
-import { usersService } from "@/libs/services/users_service";
+import ModalDelete from "@/components/admin/users/modals/ModalDelete";
+import ModalUpdate from "@/components/admin/users/modals/ModalUpdate";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const [deleteUser, setDeleteUser] = useState({});
+  const [updateUser, setUpdateUser] = useState({});
+  const [userData, setUserData] = useState([]);
+
+  useEffect(() => {
+    setUserData(users);
+  }, [users]);
 
   useEffect(() => {
     const getAllUsers = async () => {
@@ -14,7 +23,7 @@ const Users = () => {
     getAllUsers();
   }, []);
 
-  console.log({ users });
+  // console.log({ users });
 
   return (
     <>
@@ -29,13 +38,13 @@ const Users = () => {
                     <th className="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-100 text-left rounded-tl-md rounded-bl-md">
                       No
                     </th>
-                    <th className="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-100 text-left rounded-tl-md rounded-bl-md">
+                    <th className="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-100 text-left">
                       Name
                     </th>
                     <th className="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-100 text-left">
                       Email
                     </th>
-                    <th className="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-100 text-left rounded-tr-md rounded-br-md">
+                    <th className="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-100 text-left">
                       Role
                     </th>
                     <th className="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-100 text-left rounded-tr-md rounded-br-md">
@@ -44,7 +53,7 @@ const Users = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map((item:any, index) => (
+                  {userData.map((item: any, index) => (
                     <tr key={index}>
                       <td className="py-2 px-4 border-b border-b-gray-50">
                         <div className="flex items-center">
@@ -78,8 +87,18 @@ const Users = () => {
                       </td>
                       <td className="py-2 px-4 border-b border-b-gray-50">
                         <div className="flex items-center gap-4">
-                          <Button className="py-1 px-3 text-xs">update</Button>
-                          <Button className="py-1 px-3 text-xs bg-red-500">delete</Button>
+                          <Button
+                            onClick={() => setUpdateUser(item)}
+                            className="py-1 px-3 text-xs"
+                          >
+                            edit
+                          </Button>
+                          <Button
+                            onClick={() => setDeleteUser(item)}
+                            className="py-1 px-3 text-xs bg-red-500 hover:bg-red-700"
+                          >
+                            delete
+                          </Button>
                         </div>
                       </td>
                     </tr>
@@ -90,6 +109,20 @@ const Users = () => {
           </div>
         </div>
       </AdminLayout>
+      {deleteUser && Object.keys(deleteUser).length && (
+        <ModalDelete
+          setUserData={setUserData}
+          deleteUser={deleteUser}
+          setDeleteUser={setDeleteUser}
+        />
+      )}
+      {updateUser && Object.keys(updateUser).length && (
+        <ModalUpdate
+          setUserData={setUserData}
+          updateUser={updateUser}
+          setUpdateUser={setUpdateUser}
+        />
+      )}
     </>
   );
 };

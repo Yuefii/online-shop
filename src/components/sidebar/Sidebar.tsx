@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { signOut } from "next-auth/react";
 import { SidebarList } from "@/helpers/sidebar/sidebarList";
+import ModalUpdate from "../admin/users/modals/ModalUpdate";
+import ModalLogout from "../admin/users/modals/ModalLogout";
 
 const Sidebar = () => {
   const { pathname } = useRouter();
+  const [logoutUser, setLogoutUser] = useState(false);
   const isLinkActive = (path: string) => {
     return (
       pathname === path &&
@@ -39,13 +42,16 @@ const Sidebar = () => {
         ))}
         <div className="fixed left-0  bottom-0 w-64 bg-cyan-600 p-4 z-50 transition-transform">
           <button
-            onClick={() => signOut()}
+            onClick={() => setLogoutUser(true)}
             className="w-full bottom-0 flex justify-center items-center py-2 px-4 text-white text-sm font-semibold bg-cyan-800 hover:bg-black/85 hover:text-white rounded-md"
           >
             Logout
           </button>
         </div>
       </div>
+      {logoutUser && (
+        <ModalLogout setLogoutUser={setLogoutUser} />
+      )}
     </>
   );
 };
