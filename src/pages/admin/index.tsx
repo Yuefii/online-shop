@@ -1,16 +1,16 @@
-import AdminLayout from '@/components/admin/AdminLayout'
-import React from 'react'
+import React from "react";
+import AdminLayout from "@/components/admin/AdminLayout";
 
 const Admin = () => {
   return (
     <>
-    <AdminLayout>
-        <div>
-            <h1>testing</h1>
+      <AdminLayout>
+        <div className="ml-64">
+          <h1 className="p-4 font-semibold text-2xl">Pages Admin</h1>
         </div>
-    </AdminLayout>
+      </AdminLayout>
     </>
-  )
-}
+  );
+};
 
-export default Admin
+export default Admin;

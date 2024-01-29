@@ -1,19 +1,29 @@
 import React from "react";
 
-interface PropsTypes {
+interface InputProps {
   label?: string;
   name: string;
   type: string;
   placeholder?: string;
-  defaultValue?: string
-  disabled?: boolean
+  defaultValue?: string;
+  disabled?: boolean;
 }
 
-const Input: React.FC<PropsTypes> = ({ label, name, type, placeholder, defaultValue, disabled }) => {
+const Input: React.FC<InputProps> = ({
+  label,
+  name,
+  type,
+  placeholder,
+  defaultValue,
+  disabled,
+}) => {
   return (
     <>
       <div className="mt-2">
-        <label htmlFor={name} className="block mb-2 text-sm font-medium text-gray-900">
+        <label
+          htmlFor={name}
+          className="block mb-2 text-sm font-medium text-gray-900"
+        >
           {label}
         </label>
         <input

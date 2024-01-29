@@ -1,17 +1,15 @@
-import React from 'react'
-import Sidebar from '../sidebar/Sidebar'
+import React from "react";
+import Sidebar from "../sidebar/Sidebar";
 
-const AdminLayout = ({children}:any) => {
+const AdminLayout = ({ children }: any) => {
   return (
     <>
       <main>
-        <Sidebar/>
-        <div >
-            {children}
-        </div>
+        <Sidebar />
+        <main>{children}</main>
       </main>
     </>
-  )
-}
+  );
+};
 
-export default AdminLayout
+export default AdminLayout;

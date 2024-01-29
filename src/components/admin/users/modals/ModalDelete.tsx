@@ -3,15 +3,13 @@ import Modal from "@/components/ui/Modal";
 import Button from "@/components/ui/Button";
 import { usersService } from "@/libs/services/users_service";
 
-const ModalDelete = (props: any) => {
-  const { deleteUser, setDeleteUser, setUserData } = props;
-
-  const handleSubmit = async () => {
+const ModalDelete = ({ deleteUser, setDeleteUser, setUserData }: any) => {
+  const handleConfirm = async () => {
     usersService.deleteUsers(deleteUser.id);
     setDeleteUser({});
     const { data } = await usersService.getAllUsers();
     setUserData(data.data);
-  } 
+  };
 
   const handleCancel = () => {
     setDeleteUser({});
@@ -41,15 +39,15 @@ const ModalDelete = (props: any) => {
         <div className="flex justify-center gap-2">
           <Button
             type="button"
-            onClick={handleSubmit}
-            className="text-white bg-red-600 hover:bg-red-800"
+            onClick={handleConfirm}
+            className="text-white text-sm bg-red-600 hover:bg-red-800"
           >
             Yes, Im sure
           </Button>
           <Button
             type="button"
             onClick={handleCancel}
-            className="bg-white text-slate-800 border hover:bg-gray-300"
+            className="bg-white text-sm text-black border hover:bg-gray-300"
           >
             No, cancel
           </Button>

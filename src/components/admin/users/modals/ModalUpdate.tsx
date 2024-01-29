@@ -1,12 +1,11 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useState } from "react";
+import { usersService } from "@/libs/services/users_service";
 import Input from "@/components/ui/Input";
 import Modal from "@/components/ui/Modal";
 import Select from "@/components/ui/Select";
-import { usersService } from "@/libs/services/users_service";
 import Button from "@/components/ui/Button";
 
-const ModalUpdate = (props: any) => {
-  const { updateUser, setUpdateUser, setUserData } = props;
+const ModalUpdate = ({ updateUser, setUpdateUser, setUserData }: any) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -56,9 +55,8 @@ const ModalUpdate = (props: any) => {
               { label: "admin", value: "admin" },
             ]}
           />
-          <Button className="mt-3" type="submit">
-            {isLoading ? "Loading..." : "update"}
-            Update
+          <Button className="mt-3 text-xs font-semibold" type="submit">
+            {isLoading ? "Loading..." : "Update"}
           </Button>
         </form>
       </Modal>

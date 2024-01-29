@@ -1,14 +1,19 @@
+import { FaCartArrowDown, FaUser, FaUserFriends } from "react-icons/fa";
+
 export const SidebarList = [
     {
         title: "Profile",
-        link: "/admin/profile"
+        link: "/admin/profile",
+        icon: FaUser
     },
     {
         title: "Products",
-        link: "/admin/products"
+        link: "/admin/products",
+        icon: FaCartArrowDown
     },
     {
         title: "Users",
-        link: "/admin/users"
+        link: "/admin/users",
+        icon: FaUserFriends
     },
 ]
