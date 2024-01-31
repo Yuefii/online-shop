@@ -1,6 +1,7 @@
 import NextAuth from "next-auth/next"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
+import jwt from "jsonwebtoken"
 import { signIn, signInWithGoogle } from "@/libs/services/firebase_auth"
 import { compare } from "bcrypt"
 import { NextAuthOptions } from "next-auth"
@@ -74,6 +75,13 @@ const authOptions: NextAuthOptions = {
             if ("role" in token) {
                 session.user.role = token.role
             }
+
+            const accessToken = jwt.sign(token, process.env.NEXT_AUTH_SECRET || "", {
+                algorithm: "HS256"
+            })
+
+            session.accessToken = accessToken
+
             return session
         }
     },
